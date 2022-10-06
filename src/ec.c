@@ -8,6 +8,7 @@ int main(int argc, char **argv) {
         printf("  -h, --help\t\tShow this help message\n");
         printf("  -c, --gcc\t\tCompile a file via em with gcc\n");
         printf("  -cp, --gpp\t\tCompile a file via em with gcc\n");
+        return 0;
     }
 
     bool gcc = has_arg(argc, argv, "-c") || has_arg(argc, argv, "--gcc");
