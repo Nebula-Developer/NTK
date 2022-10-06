@@ -18,6 +18,7 @@ int main(int argc, char **argv) {
         printf("  -p, --path\t\tPrint the path of each process\n");
         printf("  -np, --needpath\t\tSkip if path is not found\n");
         printf("  -v, --verbose\t\tShow verbose output\n");
+        return 0;
     }
 
     bool verbose = has_arg(argc, argv, "-v") || has_arg(argc, argv, "--verbose");
