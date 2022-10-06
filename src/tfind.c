@@ -8,7 +8,7 @@
 
 int main(int argc, char **argv) {
     if (has_arg(argc, argv, "-h") || has_arg(argc, argv, "--help") || argc < 2) {
-        printf("Usage: %s [options] <filename>\n", argv[0]);
+        printf("Usage: %s <filename> [options]\n", argv[0]);
         printf("Options:\n");
         printf("  -h, --help\t\tShow this help message\n");
         printf("  -a, --all\t\tSearch all directories, including hidden.\n");
@@ -36,6 +36,8 @@ int main(int argc, char **argv) {
     char **files = readd(dir, !all, NULL, !nosubdirs);
     int count = 0;
 
+    bool found = false;
+
     for (int i = 0; i < 2048; i++) {
         if (files[i] == NULL) {
             continue;
@@ -46,6 +48,9 @@ int main(int argc, char **argv) {
         if (strcmp(file, filename) == 0) {
             printf("%s%s\n", dir, files[i]);
             count++;
+            found = true;
         }
     }
+
+    return !found;
 }

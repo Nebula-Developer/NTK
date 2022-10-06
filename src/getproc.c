@@ -11,7 +11,7 @@ int proc_find(char *procname);
 
 int main(int argc, char **argv) {
     if (has_arg(argc, argv, "-h") || has_arg(argc, argv, "--help") || argc < 2) {
-        printf("Usage: %s [options] <procname>\n", argv[0]);
+        printf("Usage: %s <procname> [options]\n", argv[0]);
         printf("Options:\n");
         printf("  -h, --help\t\tShow this help message\n");
         printf("  -s, --signal\t\tSend a signal to the process\n");
