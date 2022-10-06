@@ -10,7 +10,7 @@
 
 #define malloc(x) ntk_malloc(x)
 
-char **readd(char *p, bool ignore_hidden, char **exts) {
+char **readd(char *p, bool ignore_hidden, char **exts, bool search_subdirs) {
     DIR *d;
     struct dirent *dir;
     d = opendir(p);
@@ -36,7 +36,7 @@ char **readd(char *p, bool ignore_hidden, char **exts) {
                     i++;
                 }
             } else if (dir->d_type == DT_DIR) {
-                if (ignore_hidden && dir->d_name[0] == '.') {
+                if ((ignore_hidden && dir->d_name[0] == '.') || !search_subdirs) {
                     continue;
                 }
 
@@ -46,7 +46,7 @@ char **readd(char *p, bool ignore_hidden, char **exts) {
                     getcwd(cwd, 2048);
                     chdir(dir->d_name);
 
-                    char **subfiles = readd(".", ignore_hidden, exts);
+                    char **subfiles = readd(".", ignore_hidden, exts, search_subdirs);
                     int j = 0;
                     while (subfiles[j] != NULL) {
                         char *name = ntk_chp_malloc(sizeof(char) * 2048);

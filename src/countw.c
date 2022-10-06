@@ -14,11 +14,13 @@ int main(int argc, char **argv) {
         printf("  -a, --all\t\tCount all files, including hidden files\n");
         printf("  -e, --ext\t\tCount files with the specified extension(s) (SPLIT BY ',')\n");
         printf("  -v, --verbose\t\tShow verbose output\n");
+        printf("  -n, --nosubdirs\tDon't search subdirectories\n");
         printf("  -p, --prefix\t\tRemove the prefix from the output\n");
         return 0;
     }
 
     bool verbose = has_arg(argc, argv, "-v") || has_arg(argc, argv, "--verbose");
+    bool nosubdirs = has_arg(argc, argv, "-n") || has_arg(argc, argv, "--nosubdirs");
 
     char **exts = NULL;
     if (has_arg(argc, argv, "-e") || has_arg(argc, argv, "--ext")) {
@@ -38,7 +40,7 @@ int main(int argc, char **argv) {
     }
 
     // This will count the words of all files and subdirectories
-    char **files = readd(".", !(has_arg(argc, argv, "-a") || has_arg(argc, argv, "--all")), exts);
+    char **files = readd(".", !(has_arg(argc, argv, "-a") || has_arg(argc, argv, "--all")), exts, !nosubdirs);
     int wordCount = 0;
 
     // Count the number of lines in each file
